@@ -1,0 +1,38 @@
+services:
+  app:
+    container_name: app
+    restart: always
+    build:
+      context: .
+      dockerfile: _docker/app/Dockerfile
+    volumes:
+      - ./:/var/www/app
+
+  nginx:
+    container_name: nginx
+    restart: always
+    image: nginx:1.26.1-alpine
+    volumes:
+      - ./:/var/www/app
+      - ./_docker/nginx:/etc/nginx/conf.d
+    ports:
+      - "8080:80"
+    depends_on:
+      - app
+
+  db:
+    container_name: db
+    restart: always
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./:/var/www/app
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
+    driver: local
