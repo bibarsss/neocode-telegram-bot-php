@@ -16,7 +16,7 @@ services:
       - ./:/var/www/app
       - ./_docker/nginx:/etc/nginx/conf.d
     ports:
-      - "8080:80"
+      - "9005:80"
     depends_on:
       - app
 
