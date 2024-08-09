@@ -19,5 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/test', TestController::class);
-Route::get('/critical', [TestController::class, 'critical']);
-Route::get('/warning', [TestController::class, 'warning']);
+Route::get('/critical/{type?}', [TestController::class, 'critical']);
+Route::get('/warning/{type?}', [TestController::class, 'warning']);

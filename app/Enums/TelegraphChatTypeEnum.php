@@ -15,4 +15,13 @@ enum TelegraphChatTypeEnum: string
             self::channel->name,
         ];
     }
+
+    public static function getAllNames(): array
+    {
+        return [
+            self::private->name,
+            self::group->name,
+            self::channel->name,
+        ];
+    }
 }
